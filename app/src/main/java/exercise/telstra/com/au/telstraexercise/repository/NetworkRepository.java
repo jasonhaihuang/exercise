@@ -1,6 +1,8 @@
 package exercise.telstra.com.au.telstraexercise.repository;
 
 
+import android.util.Log;
+
 import exercise.telstra.com.au.telstraexercise.model.FactList;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,24 +18,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkRepository {
 
     //and send the request asynchronously. The response will be processed in the callbacks.
-    public void loadFactListFromServer(){
+    public void loadFactListFromServer(Callback<FactList> callback){
         // get the request
         HttpRequestInterface request = createRequest();
 
-        // send the request asynchronously, provide a callback for processing the response.
-        request.getFactList().enqueue(new Callback<FactList>() {
-            @Override
-            public void onResponse(Call<FactList> call, Response<FactList> response) {
-                // The Http request is successfully finished.
-
-            }
-
-            @Override
-            public void onFailure(Call<FactList> call, Throwable t) {
-                // The Http request is failed.
-
-            }
-        });
+        // send the request asynchronously, and processing the response in the callback.
+        request.getFactList().enqueue(callback);
     }
 
     // create the instance of retrofit request interface.
