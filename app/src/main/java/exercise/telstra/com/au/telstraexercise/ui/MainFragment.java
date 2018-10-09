@@ -1,4 +1,4 @@
-package exercise.telstra.com.au.telstraexercise.ui.main;
+package exercise.telstra.com.au.telstraexercise.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import exercise.telstra.com.au.telstraexercise.R;
+import exercise.telstra.com.au.telstraexercise.viewmodel.MainViewModel;
 
 public class MainFragment extends Fragment {
 

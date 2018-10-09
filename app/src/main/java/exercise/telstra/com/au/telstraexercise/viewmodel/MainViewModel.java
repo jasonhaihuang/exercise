@@ -1,4 +1,4 @@
-package exercise.telstra.com.au.telstraexercise.ui.main;
+package exercise.telstra.com.au.telstraexercise.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 

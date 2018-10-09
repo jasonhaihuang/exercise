@@ -3,7 +3,7 @@ package exercise.telstra.com.au.telstraexercise;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import exercise.telstra.com.au.telstraexercise.ui.main.MainFragment;
+import exercise.telstra.com.au.telstraexercise.ui.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 
