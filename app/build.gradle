@@ -4,8 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "exercise.telstra.com.au.telstraexercise"
-        //TODO change back to API 25 as required.
-        minSdkVersion 24
+        minSdkVersion 25
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
