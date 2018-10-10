@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,9 @@ public class MainFragment extends Fragment {
     // view-data binding, which make new data automatically updated on UI.
     private MainFragmentBinding mainFragmentBinding;
 
+    // the adapter for the recycler view.
+    private FactListAdapter factListAdapter;
+
     public static MainFragment newInstance() {
         return new MainFragment();
     }
@@ -36,8 +40,15 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mainFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false);
+
         // init the value as loading will hide the empty list and display a message
         mainFragmentBinding.setIsLoading(true);
+
+        // init the recycler view, setting adapter and layout manager.
+        factListAdapter = new FactListAdapter();
+        mainFragmentBinding.factList.setAdapter(factListAdapter);
+        mainFragmentBinding.factList.setLayoutManager(new LinearLayoutManager(getContext()));
+
         return mainFragmentBinding.getRoot();
     }
 
@@ -57,10 +68,12 @@ public class MainFragment extends Fragment {
                     // The reqeust is succeed, data is ready to bind on UI.
                     Log.d(TAG, "title = "+factListResponse.factList.title+", size = "+factListResponse.factList.rows.size());
                     mainFragmentBinding.setIsLoading(false);
+                    factListAdapter.setFactList(factListResponse.factList.rows);
+
                 }else if (factListResponse.errorMessage != null){
                     // The request failed, show error message.
                     Log.e(TAG, "error = "+factListResponse.errorMessage);
-                    mainFragmentBinding.setIsLoading(false);
+                    mainFragmentBinding.loadingTv.setText(factListResponse.errorMessage);
                 }
             }
         });

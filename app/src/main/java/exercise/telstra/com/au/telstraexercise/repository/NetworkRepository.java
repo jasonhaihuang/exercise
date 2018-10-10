@@ -1,12 +1,8 @@
 package exercise.telstra.com.au.telstraexercise.repository;
 
 
-import android.util.Log;
-
 import exercise.telstra.com.au.telstraexercise.model.FactList;
-import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
