@@ -17,4 +17,9 @@ public class MainActivity extends AppCompatActivity {
                     .commitNow();
         }
     }
+
+    // update the title on actionbar.
+    public void setTitle(String title){
+        getSupportActionBar().setTitle(title);
+    }
 }

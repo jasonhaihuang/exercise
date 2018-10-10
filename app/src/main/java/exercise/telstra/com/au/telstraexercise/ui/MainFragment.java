@@ -2,6 +2,7 @@ package exercise.telstra.com.au.telstraexercise.ui;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import exercise.telstra.com.au.telstraexercise.MainActivity;
 import exercise.telstra.com.au.telstraexercise.R;
 import exercise.telstra.com.au.telstraexercise.databinding.MainFragmentBinding;
 import exercise.telstra.com.au.telstraexercise.viewmodel.FactListResponse;
@@ -30,6 +32,9 @@ public class MainFragment extends Fragment {
 
     // the adapter for the recycler view.
     private FactListAdapter factListAdapter;
+
+    // the activity hold this fragment.
+    private MainActivity mainActivity;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -59,6 +64,20 @@ public class MainFragment extends Fragment {
         subscribUi(mViewModel);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity){
+            mainActivity = (MainActivity)context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mainActivity = null;
+    }
+
     // UI retained the LiveData through the view model and observe on it.
     private void subscribUi(MainViewModel viewModel){
         viewModel.getFactListResponseLiveData().observe(this, new Observer<FactListResponse>() {
@@ -66,13 +85,15 @@ public class MainFragment extends Fragment {
             public void onChanged(@Nullable FactListResponse factListResponse) {
                 if (factListResponse.factList != null){
                     // The reqeust is succeed, data is ready to bind on UI.
-                    Log.d(TAG, "title = "+factListResponse.factList.title+", size = "+factListResponse.factList.rows.size());
+                    // stop displaying loading message, make recycler view visible.
                     mainFragmentBinding.setIsLoading(false);
+                    // set the data to the adapter
                     factListAdapter.setFactList(factListResponse.factList.rows);
+                    // update the title
+                    if (mainActivity != null) mainActivity.setTitle(factListResponse.factList.title);
 
                 }else if (factListResponse.errorMessage != null){
                     // The request failed, show error message.
-                    Log.e(TAG, "error = "+factListResponse.errorMessage);
                     mainFragmentBinding.loadingTv.setText(factListResponse.errorMessage);
                 }
             }
