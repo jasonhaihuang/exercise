@@ -4,6 +4,10 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import exercise.telstra.com.au.telstraexercise.model.Fact;
 import exercise.telstra.com.au.telstraexercise.model.FactList;
 import exercise.telstra.com.au.telstraexercise.repository.NetworkRepository;
 import retrofit2.Call;
@@ -50,6 +54,9 @@ public class MainViewModel extends ViewModel {
         networkRepository.loadFactListFromServer(new Callback<FactList>() {
             @Override
             public void onResponse(Call<FactList> call, Response<FactList> response) {
+                // check the received data, filter out empty one.
+                List<Fact> filtered = filterEmptyData(response.body().rows);
+                response.body().rows = filtered;
                 // The Http request is successfully finished. Set the Fact List to Live Data, this will trigger a invoke of observer.
                 factListResponseLiveData.postValue(new FactListResponse(response.body(), null));
             }
@@ -60,5 +67,20 @@ public class MainViewModel extends ViewModel {
                 factListResponseLiveData.postValue(new FactListResponse(null, t.getMessage()));
             }
         });
+    }
+
+    // remove items with all it's fields null or empty.
+    private List<Fact> filterEmptyData(List<Fact> list){
+        List<Fact> newList = new ArrayList<>();
+        for (Fact fact : list){
+            if ((fact.title == null || fact.title.isEmpty())
+                    && (fact.description == null || fact.description.isEmpty())
+                    && (fact.imageHref == null || fact.imageHref.isEmpty())){
+                // this is an empty object, don't need anymore.
+            }else{
+                newList.add(fact);
+            }
+        }
+        return newList;
     }
 }
