@@ -13,6 +13,11 @@ package exercise.telstra.com.au.telstraexercise.model;
  */
 
 public class Fact {
+    public Fact(String t, String d, String img){
+        title = t;
+        description = d;
+        imageHref = img;
+    }
     public String title;
     public String description;
     public String imageHref;
