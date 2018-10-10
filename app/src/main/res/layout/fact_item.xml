@@ -35,12 +35,19 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/image_width"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_margin"
                 android:layout_marginTop="@dimen/item_margin"
                 android:layout_marginEnd="@dimen/item_margin"
+                android:layout_marginBottom="@dimen/item_margin"
                 android:minHeight="120dp"
+                app:imageUrl="@{fact.imageHref}"
+                app:placeHolder="@{@drawable/image_placeholder}"
+                app:errorImage="@{@drawable/image_error}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/right_arrow"
+                app:layout_constraintStart_toEndOf="@+id/desc"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
 
             <TextView
