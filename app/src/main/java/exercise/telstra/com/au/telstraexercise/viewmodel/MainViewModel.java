@@ -32,7 +32,12 @@ public class MainViewModel extends ViewModel {
     // The repository for network interactions.
     private NetworkRepository networkRepository;
 
-    // Return the Live Data, create new instance if it is null, and load the fact list from server.
+    /**
+     * This method will return invoker a LiveData, with the LiveData, all the data and following update
+     * can be notified to the observers.
+     *
+     * @return a observable LiveData
+     */
     public LiveData<FactListResponse> getFactListResponseLiveData(){
         // If the live data is null, create a new instance.
         if (factListResponseLiveData == null){
@@ -43,7 +48,9 @@ public class MainViewModel extends ViewModel {
         return factListResponseLiveData;
     }
 
-    // Load the fact list from the server.
+    /**
+     * Load the fact list from the server.
+     */
     public void loadFactList(){
         if (networkRepository == null){
             // create network repository if it hasn't be initialized.
@@ -69,7 +76,11 @@ public class MainViewModel extends ViewModel {
         });
     }
 
-    // remove items with all it's fields null or empty.
+    /**
+     * remove items with all it's fields null or empty.
+     * @param list the data received from the HTTP response.
+     * @return a filtered list without empty data.
+     */
     private List<Fact> filterEmptyData(List<Fact> list){
         List<Fact> newList = new ArrayList<>();
         for (Fact fact : list){

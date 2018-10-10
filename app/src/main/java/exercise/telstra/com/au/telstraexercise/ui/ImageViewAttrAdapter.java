@@ -12,6 +12,14 @@ import com.bumptech.glide.request.RequestOptions;
  */
 public class ImageViewAttrAdapter {
 
+    /**
+     * Defines extra ImageView attributes which can be used in the layout xml files to customize ImageViews.
+     *
+     * @param imageView The ImageView will be customized.
+     * @param url The target image will be displayed on the imageView.
+     * @param holderDrawable A placehold image will be displayed on the ImageView when Glide is downloading target image from internet.
+     * @param errorDrawable A error image to be displayed on the ImageView when Glide fail to download the target image.
+     */
     @BindingAdapter({"imageUrl", "placeHolder", "errorImage"})
     public static void loadImage(ImageView imageView, String url, Drawable holderDrawable, Drawable errorDrawable){
         Glide.with(imageView.getContext())

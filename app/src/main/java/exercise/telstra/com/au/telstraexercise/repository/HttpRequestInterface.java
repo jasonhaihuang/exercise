@@ -14,9 +14,14 @@ import retrofit2.http.GET;
 
 public interface HttpRequestInterface {
 
-    // Get the fact list from the server.
-    // The HTTP METHOD is GET, the relative URL is 's/2iodh4vg0eortkl/facts.json'
-    // The return value is an instance of FactList.
+
+    /**
+     *  Get the fact list from the server.
+     *  The HTTP METHOD is GET, the relative URL is 's/2iodh4vg0eortkl/facts.json'
+     *  The return value is an instance of FactList.
+     *
+     * @return Call<FactList> the HTTP call response
+     */
     @GET("s/2iodh4vg0eortkl/facts.json")
     Call<FactList> getFactList();
 

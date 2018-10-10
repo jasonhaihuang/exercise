@@ -36,6 +36,10 @@ public class MainFragment extends Fragment {
     // the activity hold this fragment.
     private MainActivity mainActivity;
 
+    /**
+     * Get the instance of the MainFragment.
+     * @return a instance of MainFragment
+     */
     public static MainFragment newInstance() {
         return new MainFragment();
     }
@@ -90,7 +94,10 @@ public class MainFragment extends Fragment {
         mainActivity = null;
     }
 
-    // UI retained the LiveData through the view model and observe on it.
+    /**
+     * UI retained the LiveData through the view model and observe on it.
+     * @param viewModel the ViewModel on which the LiveData is maintained.
+     */
     private void subscribUi(MainViewModel viewModel){
         viewModel.getFactListResponseLiveData().observe(this, new Observer<FactListResponse>() {
             @Override

@@ -13,7 +13,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class NetworkRepository {
 
-    //and send the request asynchronously. The response will be processed in the callbacks.
+    /**
+     * This method will send a asynchronous request to get the data from server.
+     * The response will be processed in the callbacks.
+     *
+     * @param callback callback method to process the response.
+     */
     public void loadFactListFromServer(Callback<FactList> callback){
         // get the request
         HttpRequestInterface request = createRequest();
@@ -22,7 +27,11 @@ public class NetworkRepository {
         request.getFactList().enqueue(callback);
     }
 
-    // create the instance of retrofit request interface.
+    /**
+     * create the instance of retrofit request interface.
+     *
+     * @return HttpRequesInterface the interface instance, representing the GetFactList Service API.
+     */
     private HttpRequestInterface createRequest(){
 
         // create the request interface instance through retrofit

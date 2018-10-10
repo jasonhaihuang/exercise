@@ -24,8 +24,13 @@ public class FactListAdapter extends RecyclerView.Adapter<FactListAdapter.FactVi
     // The data will be displayed on the list view.
     List<Fact> data;
 
-    // set new fact data to the adapter.
-    // By comparing the new data with current data, find the changed items and update accordingly.
+
+    /**
+     *  Set new fact data to the adapter.
+     *  By comparing the new data with current data, find the changed items and update accordingly.
+     *
+     * @param factList
+     */
     public void setFactList(final List<Fact> factList){
         if (data == null){
             data = factList;
@@ -61,7 +66,13 @@ public class FactListAdapter extends RecyclerView.Adapter<FactListAdapter.FactVi
         }
     }
 
-
+    /**
+     * Create a new view holder.
+     *
+     * @param viewGroup the parent view group.
+     * @param i the position of the view
+     * @return ViewHolder a viewHolder instance
+     */
     @NonNull
     @Override
     public FactViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -72,13 +83,23 @@ public class FactListAdapter extends RecyclerView.Adapter<FactListAdapter.FactVi
         return new FactViewHolder(factItemBinding);
     }
 
+    /**
+     * Bind a data with a viewHolder.
+     *
+     * @param factViewHolder The viewHolder ready to bind new data to display
+     * @param i The index of the data in the list.
+     */
     @Override
     public void onBindViewHolder(@NonNull FactViewHolder factViewHolder, int i) {
         // bind a new data to the view
         factViewHolder.binding.setFact(data.get(i));
     }
 
-    // return the total number of the items in the list.
+    /**
+     * return the total number of the items in the list.
+     *
+     * @return total item numbers hold in the list.
+     */
     @Override
     public int getItemCount() {
         return data == null? 0 : data.size();
@@ -90,8 +111,14 @@ public class FactListAdapter extends RecyclerView.Adapter<FactListAdapter.FactVi
      */
     static class FactViewHolder extends RecyclerView.ViewHolder{
 
+        // The databinding object for the item layout.
         final FactItemBinding binding;
 
+        /**
+         * Constructor method for FactViewHolder.
+         *
+         * @param factItemBinding the instance for binding data with the viewHolder
+         */
         public FactViewHolder(@NonNull FactItemBinding factItemBinding) {
             super(factItemBinding.getRoot());
             binding = factItemBinding;
