@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TelstraExercise</string>
     <string name="loading_data">loading data...</string>
+    <string name="error">Data loading failed.</string>
+    <string name="data_refreshed">Data refreshed.</string>
+    <string name="data_load_fail">Data loading failed.</string>
 </resources>
